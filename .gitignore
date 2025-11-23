@@ -4,3 +4,4 @@ __pycache__/
 *.mp3
 polyintel-frontend-complete.tar.gz
 spoon-core-vendored-backup/
+.env

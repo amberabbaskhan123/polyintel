@@ -6,6 +6,7 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import time
+import asyncio
 import json
 from fastapi.responses import FileResponse, StreamingResponse
 import httpx
@@ -961,9 +962,7 @@ async def polycaster_podcast(req: PodcastRequest):
         result = await generator.generate_podcast_briefing(
             query=req.query,
             category=req.category or "crypto",
-            duration=req.duration or "PAST_24_HOURS",
-            variant=(req.variant or 1),
-            target_duration_sec=req.target_duration_sec or 0
+            duration=req.duration or "PAST_24_HOURS"
         )
         
         if result.get("error"):
