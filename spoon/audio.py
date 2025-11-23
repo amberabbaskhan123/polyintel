@@ -1,4 +1,5 @@
 import os
+from typing import Optional, Dict
 from elevenlabs.client import ElevenLabs
 
 def _get_key() -> str:
@@ -8,7 +9,7 @@ def _get_key() -> str:
             return v
     return ""
 
-def generate_briefing(text: str, filename: str | None = None, settings: dict | None = None, output_format: str | None = None, voice_id: str | None = None, model_id: str | None = None) -> str | None:
+def generate_briefing(text: str, filename: Optional[str] = None, settings: Optional[Dict] = None, output_format: Optional[str] = None, voice_id: Optional[str] = None, model_id: Optional[str] = None) -> Optional[str]:
     api_key = _get_key()
     if not api_key:
         return None

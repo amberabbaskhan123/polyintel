@@ -1,12 +1,13 @@
 import os
 import httpx
+from typing import List, Dict, Optional
 
 class SudoClient:
     def __init__(self) -> None:
         self.base_url = os.getenv("SUDO_BASE_URL", "https://sudoapp.dev")
         self.api_key = os.getenv("SUDO_API_KEY", "")
 
-    async def chat_completions(self, model: str, messages: list[dict], store: bool = True, api_key: str | None = None) -> dict:
+    async def chat_completions(self, model: str, messages: List[Dict], store: bool = True, api_key: Optional[str] = None) -> Dict:
         key = api_key or self.api_key
         if not key:
             return {"error": "missing_api_key"}

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional, Dict
 import os
 import time
 import httpx
@@ -12,7 +12,7 @@ class MCPTools:
         self.desearch = DeSearchClient()
         self.apro = AproOracleClient()
         self.aioz = AiozClient()
-        self._cache: dict[str, Any] = {}
+        self._cache: Dict[str, Any] = {}
 
     def _cache_get(self, key: str, ttl: float) -> Any:
         item = self._cache.get(key)
@@ -98,7 +98,7 @@ class MCPTools:
             f"fundamental={context.get('fundamental_truth','')} decision={context.get('decision','')}"
         )
 
-    async def kalshi_odds(self, market_slug: str) -> float | None:
+    async def kalshi_odds(self, market_slug: str) -> Optional[float]:
         base = os.getenv("KALSHI_BASE_URL", "https://api.kalshi.com/trade-api/v2")
         try:
             cached = self._cache_get(f"kalshi:{market_slug}", ttl=120.0)
